@@ -1,0 +1,24 @@
+services:
+  api:
+    build: ./app
+    container_name: simpleflashcard-api
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    environment:
+      - API_PORT=${API_PORT}
+    volumes:
+      - ./app/db.db:/app/db.db
+    restart: unless-stopped
+
+  spa:
+    build: ./spa
+    container_name: simpleflashcardub-spa
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://api:${API_PORT}
+    volumes:
+      - ./spa:/app
+      - /app/node_modules
+    depends_on:
+      - api
