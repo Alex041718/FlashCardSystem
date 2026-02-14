@@ -1,8 +1,10 @@
 from typing import Union, List
-
+import os
 import sqlite3
 
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -15,10 +17,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
 
 ### Models
 
@@ -162,3 +160,20 @@ def delete_card(card_id: int, db: sqlite3.Connection = Depends(get_db)):
     return {"message": "Card deleted successfully"}
 
 app.include_router(router, prefix="/api")
+
+# Serve static files in production (when dist/ folder exists)
+DIST_DIR = "dist"
+if os.path.exists(DIST_DIR):
+    # Mount static files (JS, CSS, images, etc.)
+    app.mount("/assets", StaticFiles(directory=f"{DIST_DIR}/assets"), name="static")
+
+    # Serve index.html for all other routes (SPA routing)
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        """Serve the React SPA for all non-API routes."""
+        # Check if file exists in dist/
+        file_path = os.path.join(DIST_DIR, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        # Otherwise, serve index.html (for client-side routing)
+        return FileResponse(f"{DIST_DIR}/index.html")
