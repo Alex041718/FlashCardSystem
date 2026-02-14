@@ -24,7 +24,7 @@ L'ensemble est orchestré par **Docker Compose** pour un environnement de dével
 3.  Lancez les conteneurs :
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 Une fois les conteneurs démarrés :
@@ -41,7 +41,7 @@ Le projet est configuré pour le **Hot Reload** (rechargement à chaud) :
 
 ### Ports
 
-Les ports sont configurables via le fichier `.env` (pour l'API) et `docker-compose.yml`.
+Les ports sont configurables via le fichier `.env` (pour l'API) et `docker compose.yml`.
 
 *   **API** : Port 8000 (par défaut)
 *   **SPA** : Port 5173 (pour le développement avec Vite pour l'instant)

@@ -1,0 +1,48 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.card-list-item {
+  @include card;
+  @include transition(transform);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.card-list-item__content {
+  @include flex-column;
+  gap: $spacing-sm;
+}
+
+.card-list-item__entry,
+.card-list-item__value,
+.card-list-item__hint {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: flex-start;
+}
+
+.card-list-item__label {
+  font-weight: $font-weight-semibold;
+  color: $primary-color;
+  flex-shrink: 0;
+  min-width: 24px;
+}
+
+.card-list-item__text {
+  flex: 1;
+  color: $text-primary;
+  word-break: break-word;
+}
+
+.card-list-item__hint {
+  padding-top: $spacing-xs;
+  border-top: 1px solid $border-color;
+
+  .card-list-item__text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-style: italic;
+  }
+}

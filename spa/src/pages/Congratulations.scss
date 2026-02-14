@@ -1,0 +1,109 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.congratulations {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  @include flex-center;
+  padding: $spacing-lg;
+}
+
+.congratulations__content {
+  @include flex-column;
+  @include flex-center;
+  gap: $spacing-xl;
+  text-align: center;
+  max-width: 500px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.congratulations__emoji {
+  display: flex;
+  gap: $spacing-lg;
+  font-size: 60px;
+  animation: bounce 1s infinite;
+}
+
+.congratulations__firework {
+  display: inline-block;
+  animation: float 2s ease-in-out infinite;
+
+  &:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+}
+
+.congratulations__title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: white;
+  margin: 0;
+
+  @include tablet {
+    font-size: 48px;
+  }
+}
+
+.congratulations__message {
+  font-size: $font-size-lg;
+  color: rgba(white, 0.9);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.congratulations__emoji-large {
+  font-size: 80px;
+  animation: pulse 2s infinite;
+}
+
+.congratulations__button {
+  margin-top: $spacing-lg;
+  padding: $spacing-md $spacing-xl !important;
+  font-size: $font-size-lg !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}

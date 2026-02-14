@@ -13,7 +13,7 @@ All development is done through Docker Compose. Ensure Docker Desktop is running
 ### Starting the Application
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 - Frontend: http://localhost:5173
@@ -22,18 +22,18 @@ docker-compose up --build
 ### Stopping the Application
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Rebuilding After Changes
 
 ```bash
 # Rebuild specific service
-docker-compose build api
-docker-compose build spa
+docker compose build api
+docker compose build spa
 
 # Or rebuild everything
-docker-compose up --build
+docker compose up --build
 ```
 
 ### Running Commands Inside Containers
@@ -132,7 +132,7 @@ The frontend communicates with the backend via:
 Configure via `.env` file (copy from `.env.example`):
 - `API_PORT`: Backend API port (default: 8000)
 
-Frontend receives `VITE_API_URL` via docker-compose but proxies through Vite's dev server.
+Frontend receives `VITE_API_URL` via docker compose but proxies through Vite's dev server.
 
 ## Testing
 
