@@ -5,9 +5,9 @@ services:
       dockerfile: Dockerfile.prod
     container_name: simpleflashcard-prod
     ports:
-      - "8000:8000"
+      - "${API_PORT}:${API_PORT}"
     environment:
-      - API_PORT=8000
+      - API_PORT=${API_PORT}
     volumes:
       - ./app/db.db:/app/db.db
     restart: unless-stopped

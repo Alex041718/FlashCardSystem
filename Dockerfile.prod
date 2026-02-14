@@ -23,10 +23,6 @@ COPY app/ .
 # Copy built frontend from previous stage
 COPY --from=frontend-builder /frontend/dist ./dist
 
-# Expose port (using ARG for build-time, ENV for runtime)
-ARG API_PORT=8000
-ENV API_PORT=${API_PORT}
-EXPOSE ${API_PORT}
-
 # Run in production mode
+# Le port est défini par la variable API_PORT depuis le .env
 CMD fastapi run main.py --host 0.0.0.0 --port $API_PORT
