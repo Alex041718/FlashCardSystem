@@ -23,10 +23,8 @@ COPY app/ .
 # Copy built frontend from previous stage
 COPY --from=frontend-builder /frontend/dist ./dist
 
-# Expose port (using ARG for build-time, ENV for runtime)
-ARG API_PORT=8000
-ENV API_PORT=${API_PORT}
-EXPOSE ${API_PORT}
+# Note: API_PORT est défini dans docker-compose.prod.yml depuis le .env
+EXPOSE 8000
 
-# Run in production mode
+# Run in production mode (utilise $API_PORT depuis l'environnement)
 CMD fastapi run main.py --host 0.0.0.0 --port $API_PORT
