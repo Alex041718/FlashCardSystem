@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: simpleflashcard-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - API_PORT=8000
+    volumes:
+      - ./app/db.db:/app/db.db
+    restart: unless-stopped

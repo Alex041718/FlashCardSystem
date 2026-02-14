@@ -140,6 +140,41 @@ No test framework is currently configured. When adding tests:
 - Backend: Use pytest with FastAPI's TestClient
 - Frontend: Use Vitest (already configured with Vite)
 
+## Production Deployment
+
+The project uses **Solution B** from `docs/production-strategy.md`: FastAPI serves the built React application.
+
+### Building for Production
+
+```bash
+# Build and run production container
+docker compose -f docker-compose.prod.yml up --build
+```
+
+The production build:
+1. Builds the React frontend (`npm run build` → creates `dist/`)
+2. Copies the built files into the Python container
+3. FastAPI serves both the API (`/api/*`) and static files (`/*`)
+
+Application accessible at: http://localhost:8000
+
+### How it Works
+
+- **Multi-stage Dockerfile** (`Dockerfile.prod`):
+  - Stage 1: Builds React app with Node
+  - Stage 2: Copies built files into Python container
+- **FastAPI Configuration**:
+  - `/api/*` → API endpoints
+  - `/assets/*` → Static files (JS, CSS)
+  - `/*` → Serves `index.html` (SPA routing)
+
+### Production vs Development
+
+- **Development**: Separate containers for API and Vite dev server
+  - `docker compose up` → API on :8000, Frontend on :5173
+- **Production**: Single container serving both
+  - `docker compose -f docker-compose.prod.yml up` → Everything on :8000
+
 ## Additional Resources
 
 See documentation in `/docs`:
