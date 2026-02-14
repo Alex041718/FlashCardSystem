@@ -2,8 +2,8 @@ import apiClient from '../api/client';
 import type { Card, CardResponse } from '../models/Card';
 
 export const getCardsByCollection = async (collectionId: number): Promise<CardResponse[]> => {
-  const response = await apiClient.get<CardResponse[]>(`/collections/${collectionId}/cards/`);
-  return response.data;
+  const response = await apiClient.get<{ cards: CardResponse[] }>(`/collections/${collectionId}/cards/`);
+  return response.data.cards;
 };
 
 export const createCard = async (card: Card): Promise<CardResponse> => {

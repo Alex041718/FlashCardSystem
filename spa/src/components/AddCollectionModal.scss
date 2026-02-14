@@ -1,0 +1,8 @@
+@import '../styles/variables';
+
+.add-collection-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding-top: $spacing-md;
+}

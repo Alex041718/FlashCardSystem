@@ -9,7 +9,7 @@ app = FastAPI()
 router = APIRouter()
 
 def get_db():
-    db = sqlite3.connect("db.db")
+    db = sqlite3.connect("db.db", check_same_thread=False)
     db.row_factory = sqlite3.Row # Return results as dict-like objects
     try:
         yield db
@@ -118,12 +118,6 @@ def get_cards_by_collection(collection_id: int, db: sqlite3.Connection = Depends
 def create_card(card: Card, db: sqlite3.Connection = Depends(get_db)):
     """Create a new card."""
     cursor = db.cursor()
-    cursor.execute(
-        "INSERT INTO Cards (entry, value, hint, collectionId) VALUES (?, ?, ?, ?)",
-        (card.entry, card.value, card.hint, collectionId)
-    ) # Wait, original code had typo here? No, card.collectionId. I should check my memory of original file.
-    # Original: (card.entry, card.value, card.hint, card.collectionId)
-    # I should be careful.
     cursor.execute(
         "INSERT INTO Cards (entry, value, hint, collectionId) VALUES (?, ?, ?, ?)",
         (card.entry, card.value, card.hint, card.collectionId)

@@ -1,0 +1,42 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.kpi-card {
+  @include card;
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  color: white;
+  min-height: 100px;
+  @include transition(transform);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.kpi-card__content {
+  @include flex-between;
+  gap: $spacing-md;
+}
+
+.kpi-card__icon {
+  font-size: $font-size-3xl;
+  opacity: 0.9;
+}
+
+.kpi-card__info {
+  flex: 1;
+  text-align: right;
+}
+
+.kpi-card__value {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  margin-bottom: $spacing-xs;
+}
+
+.kpi-card__label {
+  font-size: $font-size-sm;
+  opacity: 0.9;
+  font-weight: $font-weight-medium;
+}

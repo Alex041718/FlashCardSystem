@@ -1,0 +1,104 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.collection-detail {
+  min-height: 100vh;
+  background-color: $bg-secondary;
+  padding-bottom: 100px; // Space for play button
+}
+
+.collection-detail__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-md;
+}
+
+.collection-detail__header {
+  margin-bottom: $spacing-xl;
+  position: relative;
+}
+
+.collection-detail__back {
+  margin-bottom: $spacing-md;
+}
+
+.collection-detail__title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.collection-detail__favorite {
+  font-size: $font-size-2xl;
+}
+
+.collection-detail__cards {
+  margin-bottom: $spacing-xl;
+}
+
+.collection-detail__cards-header {
+  margin-bottom: $spacing-md;
+}
+
+.collection-detail__section-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+}
+
+.collection-detail__list {
+  @include flex-column;
+  gap: $spacing-md;
+}
+
+.collection-detail__empty {
+  text-align: center;
+  padding: $spacing-2xl;
+  color: $text-secondary;
+
+  p {
+    margin-bottom: $spacing-sm;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.collection-detail__error {
+  @include flex-center;
+  @include flex-column;
+  min-height: 100vh;
+  gap: $spacing-lg;
+  color: $text-secondary;
+  text-align: center;
+}
+
+.collection-detail__play-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $bg-primary;
+  padding: $spacing-md;
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: $z-fab;
+}
+
+.collection-detail__play-button {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex !important;
+}
+
+.collection-detail__fab {
+  position: fixed !important;
+  bottom: calc($spacing-lg + 70px); // Above play button
+  right: $spacing-lg;
+  z-index: $z-fab + 1;
+}

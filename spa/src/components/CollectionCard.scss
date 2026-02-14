@@ -1,0 +1,44 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.collection-card {
+  @include card;
+  cursor: pointer;
+  @include transition(all);
+  border-left: 4px solid transparent;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+.collection-card__header {
+  @include flex-between;
+  margin-bottom: $spacing-sm;
+  gap: $spacing-sm;
+}
+
+.collection-card__name {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+  flex: 1;
+  @include truncate;
+}
+
+.collection-card__favorite {
+  font-size: $font-size-lg;
+  flex-shrink: 0;
+}
+
+.collection-card__date {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  margin: 0;
+}

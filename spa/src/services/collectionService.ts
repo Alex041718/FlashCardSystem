@@ -2,8 +2,8 @@ import apiClient from '../api/client';
 import type { Collection, CollectionResponse } from '../models/Collection';
 
 export const getCollections = async (): Promise<CollectionResponse[]> => {
-  const response = await apiClient.get<CollectionResponse[]>('/collections/');
-  return response.data;
+  const response = await apiClient.get<{ collections: CollectionResponse[] }>('/collections/');
+  return response.data.collections;
 };
 
 export const createCollection = async (collection: Collection): Promise<CollectionResponse> => {
