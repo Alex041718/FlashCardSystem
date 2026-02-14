@@ -23,8 +23,6 @@ COPY app/ .
 # Copy built frontend from previous stage
 COPY --from=frontend-builder /frontend/dist ./dist
 
-# Note: API_PORT est défini dans docker-compose.prod.yml depuis le .env
-EXPOSE 8000
-
-# Run in production mode (utilise $API_PORT depuis l'environnement)
+# Run in production mode
+# Le port est défini par la variable API_PORT depuis le .env
 CMD fastapi run main.py --host 0.0.0.0 --port $API_PORT
