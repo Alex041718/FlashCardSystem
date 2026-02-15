@@ -11,6 +11,7 @@ import type { CollectionResponse } from '../models/Collection';
 import type { CardResponse } from '../models/Card';
 import CardListItem from '../components/CardListItem';
 import AddCardModal from '../components/AddCardModal';
+import DeleteCardModal from '../components/DeleteCardModal';
 import Loader from '../components/Loader';
 import { showError } from '../utils/toast';
 
@@ -21,6 +22,8 @@ const CollectionDetail = () => {
   const [cards, setCards] = useState<CardResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState<number | null>(null);
 
   const loadData = async () => {
     if (!id) return;
@@ -46,6 +49,15 @@ const CollectionDetail = () => {
   }, [id]);
 
   const handleModalSuccess = () => {
+    loadData();
+  };
+
+  const handleDeleteCard = (cardId: number) => {
+    setCardToDelete(cardId);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDeleteSuccess = () => {
     loadData();
   };
 
@@ -106,7 +118,7 @@ const CollectionDetail = () => {
           ) : (
             <div className="collection-detail__list">
               {cards.map((card) => (
-                <CardListItem key={card.id} card={card} />
+                <CardListItem key={card.id} card={card} onDelete={handleDeleteCard} />
               ))}
             </div>
           )}
@@ -142,6 +154,13 @@ const CollectionDetail = () => {
         onClose={() => setModalOpen(false)}
         onSuccess={handleModalSuccess}
         collectionId={Number(id)}
+      />
+
+      <DeleteCardModal
+        open={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onSuccess={handleDeleteSuccess}
+        cardId={cardToDelete}
       />
     </div>
   );

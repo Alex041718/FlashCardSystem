@@ -1,13 +1,26 @@
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './CardListItem.scss';
 import type { CardResponse } from '../models/Card';
 
 interface CardListItemProps {
   card: CardResponse;
+  onDelete: (id: number) => void;
 }
 
-const CardListItem = ({ card }: CardListItemProps) => {
+const CardListItem = ({ card, onDelete }: CardListItemProps) => {
   return (
     <div className="card-list-item">
+      <div className="card-list-item__actions">
+        <IconButton 
+          onClick={() => onDelete(card.id)} 
+          size="small" 
+          aria-label="delete"
+          color="default"
+        >
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      </div>
       <div className="card-list-item__content">
         <div className="card-list-item__entry">
           <span className="card-list-item__label">Q:</span>
