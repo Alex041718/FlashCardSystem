@@ -23,7 +23,8 @@ L'ensemble est orchestré par **Docker Compose** pour un environnement de dével
 
 1.  Clonez le dépôt (si ce n'est pas déjà fait).
 2.  Renommez le fichier `.env.example` en `.env` et configurez les variables d'environnement si nécessaire (ex: `API_PORT`).
-3.  Lancez les conteneurs :
+3.  Renommez le fichier dB `db.example.db` en `db.db`
+4.  Lancez les conteneurs :
 
 ```bash
 docker compose up --build
