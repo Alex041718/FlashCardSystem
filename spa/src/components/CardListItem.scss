@@ -4,15 +4,30 @@
 .card-list-item {
   @include card;
   @include transition(transform);
+  position: relative;
 
   &:hover {
     transform: translateY(-2px);
   }
 }
 
+.card-list-item__actions {
+  position: absolute;
+  top: $spacing-xs;
+  right: $spacing-xs;
+  opacity: 0.5;
+  transition: opacity $transition-base;
+
+  &:hover {
+    opacity: 1;
+    color: $error-color;
+  }
+}
+
 .card-list-item__content {
   @include flex-column;
   gap: $spacing-sm;
+  padding-right: $spacing-lg; // Add padding to avoid overlap with delete button
 }
 
 .card-list-item__entry,
